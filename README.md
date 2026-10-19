@@ -1,68 +1,136 @@
-﻿# ðŸï¸ Sistema de Local de Motos
+# Motorcycle Shop System - localDeMotos
 
-Sistema completo de inventario y ventas para un local de motos. Es el proyecto mÃ¡s amplio del portafolio, desarrollado en Java con arquitectura **MVC**, interfaz grÃ¡fica en **Swing** y persistencia de datos mediante el patrÃ³n **DAO**.
+## Description
 
-## ðŸ“‹ CaracterÃ­sticas
+Complete inventory and sales management system for a motorcycle shop: register motorcycles, control stock, record sales by reference or directly from inventory, search motorcycles and review monthly and yearly sales statistics. This is the most comprehensive project in this portfolio, built with an **MVC** architecture, a multi-window **Swing** interface and file persistence through the **DAO** pattern with custom business exceptions.
 
-- Registro de motos con validaciÃ³n de datos y excepciones personalizadas
-- GestiÃ³n de inventario (alta, consulta y control de stock)
-- Registro de ventas por referencia o registro directo
-- Ventana de bÃºsqueda de motos por referencia
-- EstadÃ­sticas de ventas mensuales y anuales
-- Procesamiento de transacciones desde archivo
-- Persistencia de datos con patrÃ³n DAO y DTO
-- Interfaz grÃ¡fica Swing con mÃºltiples ventanas (MVC)
+Academic project developed for the **Java programming** courses - Systems Engineering, Universidad El Bosque.
 
-## ðŸ› ï¸ TecnologÃ­as
+## Author
 
-- **Java** (JDK)
-- **Swing** â€” interfaz grÃ¡fica
-- **Maven** â€” gestiÃ³n del proyecto y dependencias
-- **PatrÃ³n MVC** â€” separaciÃ³n de vista, controlador y modelo
-- **PatrÃ³n DAO** â€” acceso a datos
+- Sergio Alejandro Parra Rivera
 
-## ðŸš€ CÃ³mo ejecutar
+## Technologies
+
+- Java 21 (compiled with `maven-compiler-plugin`)
+- Swing for the graphical interface
+- Maven 3.8+ with `exec-maven-plugin` to run the application
+- **MVC** architecture (`controller`, `model`, `view`, `persistence`, `exceptions` layers)
+- **DAO** and **DTO** patterns with a `DataMapper` for plain text file persistence
+- Custom exceptions for business rule validation
+
+## Requirements
+
+| Requirement | Version | How to check |
+| --- | --- | --- |
+| JDK | 21 or higher | `javac -version` |
+| Maven | 3.8 or higher | `mvn -v` |
+| Git | Any recent version | `git --version` |
+
+## Installation
+
+Follow these steps exactly so the application runs on the first try.
+
+### 1. Clone the repository
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/P2X4A/localDeMotos.git
+```
+
+### 2. Enter the project folder
+
+```bash
 cd localDeMotos
+```
 
-# Compilar con Maven
+> On Windows, if your path contains spaces, always quote it, for example: `cd "C:\Users\Example\Documents\localDeMotos"`.
+
+### 3. Verify your environment
+
+```bash
+javac -version
+mvn -v
+```
+
+Expected: JDK 21 (or higher) and Maven 3.8 (or higher). If any command fails, install or update that tool before continuing.
+
+### 4. Compile the project
+
+```bash
 mvn clean compile
-
-# Ejecutar (clase principal: AplMain)
-mvn exec:java -Dexec.mainClass="AplMain"
 ```
 
-> Nota: si no tienes Maven instalado, compila directamente con `javac` los archivos de `src/` y ejecuta la clase `AplMain`.
+What success looks like:
 
-## ðŸ“ Estructura del proyecto
+- The console ends with `BUILD SUCCESS`.
+- A `target/classes/` folder is created with the compiled classes.
 
+## Running the application
+
+```bash
+mvn exec:java
 ```
+
+The main window opens with access to every module: motorcycle registry, sales, search, transaction file processing and sales statistics. Sample data is included in the repository (`ventas.txt`).
+
+Troubleshooting:
+
+- `ClassNotFoundException` or missing main class: compile first with `mvn clean compile`.
+- `UnsupportedClassVersionError`: your JDK is older than 21; install JDK 21 or higher and check it with `javac -version`.
+
+## Main features
+
+- **Motorcycle registry:** full form to register motorcycles with field validation; invalid data raises custom exceptions such as `CampoInvalidoException` and `InformacionInvalidaException`.
+- **Inventory control:** stock is updated with every operation and validated against availability (`InventarioInsuficienteException`); unknown references raise `MotoNoExisteException`.
+- **Sales:** record sales directly from inventory or by motorcycle reference, with automatic stock update.
+- **Search and file processing:** look up a motorcycle by its reference and process transaction files, validating their format (`FormatoArchivoInvalidoException`).
+- **Statistics:** monthly and yearly sales reports computed from the recorded sales.
+- **Persistence:** inventory, sales and transaction files are stored in plain text through the DAO layer (`InventarioImplIDAO`, `VentaImplIDAO`, `TransaccionArchivoImplIDAO`) using DTOs and a `DataMapper`.
+
+## Project structure
+
+```text
 localDeMotos/
-â”œâ”€â”€ pom.xml
-â”œâ”€â”€ README.md
-â”œâ”€â”€ LICENSE
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ AplMain.java              # Punto de entrada
-â”‚   â”œâ”€â”€ Controlador.java          # LÃ³gica de negocio
-â”‚   â”œâ”€â”€ SistemaLocal.java         # Modelo del sistema
-â”‚   â”œâ”€â”€ Moto.java, Venta.java     # Entidades de dominio
-â”‚   â”œâ”€â”€ DataMapper.java           # Mapeo objeto-relacional
-â”‚   â”œâ”€â”€ FileHandler.java          # Lectura/escritura de archivos
-â”‚   â”œâ”€â”€ IDAO.java, ...DAOImpl.java # Acceso a datos (patrÃ³n DAO)
-â”‚   â”œâ”€â”€ *.DTO.java                # Objetos de transferencia
-â”‚   â”œâ”€â”€ *.Exception.java          # Excepciones personalizadas
-â”‚   â”œâ”€â”€ VentanaPrincipal.java     # Ventana principal Swing
-â”‚   â””â”€â”€ *.java                    # Otras ventanas Swing
-â””â”€â”€ ventas.txt                    # Archivo de datos incluido
+├── pom.xml
+├── README.md
+├── LICENSE
+├── ventas.txt                             # Sample sales data used by the application
+├── properties.properties                  # Application settings
+└── src/
+    └── co/edu/unbosque/
+        ├── controller/
+        │   ├── AplMain.java               # Entry point (main class)
+        │   └── Controlador.java           # Application controller (MVC)
+        ├── model/
+        │   ├── SistemaLocal.java          # Core model of the system
+        │   ├── Moto.java                  # Motorcycle entity
+        │   ├── Venta.java                 # Sale entity
+        │   ├── TransaccionArchivo.java    # Transaction loaded from file
+        │   └── EstadisticaVentaMes.java   # Monthly sales statistics
+        ├── exceptions/                    # Custom business exceptions
+        │   ├── CampoInvalidoException.java
+        │   ├── InformacionInvalidaException.java
+        │   ├── InventarioInsuficienteException.java
+        │   ├── MotoNoExisteException.java
+        │   ├── FormatoArchivoInvalidoException.java
+        │   └── ValidacionReglaNegocioException.java
+        ├── persistence/                   # Data access (DAO pattern)
+        │   ├── IDAO.java
+        │   ├── InventarioImplIDAO.java
+        │   ├── VentaImplIDAO.java
+        │   ├── TransaccionArchivoImplIDAO.java
+        │   ├── *DTO.java                  # Transfer objects
+        │   ├── DataMapper.java
+        │   └── FileHandler.java
+        ├── util/
+        │   ├── Constant.java
+        │   └── properties.properties
+        └── view/                          # Swing windows
+            ├── VentanaPrincipal.java
+            ├── VentanaRegistroMoto.java
+            ├── VentanaRegistroVenta.java
+            ├── VentanaVentaPorReferencia.java
+            ├── VentanaBuscarReferencia.java
+            ├── VentanaProcesarArchivo.java
+            └── VentanaVentasAnuales.java
 ```
-
-## ðŸ‘¨â€ðŸ’» Autor
-
-Sergio Parra â€” Estudiante de ingenierÃ­a de sistemas
-
----
-
-*Proyecto desarrollado con fines acadÃ©micos y de portafolio.*
