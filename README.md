@@ -1,71 +1,68 @@
-﻿# Sistema de Local de Motos
+﻿# ðŸï¸ Sistema de Local de Motos
 
-Sistema completo de inventario y ventas para un local de motos, el proyecto mas amplio del portafolio.
+Sistema completo de inventario y ventas para un local de motos. Es el proyecto mÃ¡s amplio del portafolio, desarrollado en Java con arquitectura **MVC**, interfaz grÃ¡fica en **Swing** y persistencia de datos mediante el patrÃ³n **DAO**.
 
-## Detalle
+## ðŸ“‹ CaracterÃ­sticas
 
-| | |
-|---|---|
-| Tipo | Swing (MVC) |
-| Archivos Java | 31 |
-| Version de Java | 21 |
-| Patron | Arquitectura MVC completa con patron DAO, DTO y excepciones propias |
+- Registro de motos con validaciÃ³n de datos y excepciones personalizadas
+- GestiÃ³n de inventario (alta, consulta y control de stock)
+- Registro de ventas por referencia o registro directo
+- Ventana de bÃºsqueda de motos por referencia
+- EstadÃ­sticas de ventas mensuales y anuales
+- Procesamiento de transacciones desde archivo
+- Persistencia de datos con patrÃ³n DAO y DTO
+- Interfaz grÃ¡fica Swing con mÃºltiples ventanas (MVC)
 
-## Funcionalidades
+## ðŸ› ï¸ TecnologÃ­as
 
-- CRUD de motos con busqueda por referencia
-- Registro y consulta de ventas
-- Estadisticas de ventas por mes
-- Procesamiento e importacion de archivos
-- Persistencia DAO en archivo plano
-- DataMapper entidad-DTO
-- Excepciones de dominio
-- Interfaz grafica Swing
+- **Java** (JDK)
+- **Swing** â€” interfaz grÃ¡fica
+- **Maven** â€” gestiÃ³n del proyecto y dependencias
+- **PatrÃ³n MVC** â€” separaciÃ³n de vista, controlador y modelo
+- **PatrÃ³n DAO** â€” acceso a datos
 
-## Estructura del proyecto
+## ðŸš€ CÃ³mo ejecutar
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/P2X4A/localDeMotos.git
+cd localDeMotos
+
+# Compilar con Maven
+mvn clean compile
+
+# Ejecutar (clase principal: AplMain)
+mvn exec:java -Dexec.mainClass="AplMain"
+```
+
+> Nota: si no tienes Maven instalado, compila directamente con `javac` los archivos de `src/` y ejecuta la clase `AplMain`.
+
+## ðŸ“ Estructura del proyecto
 
 ```
 localDeMotos/
-|-- pom.xml       configuracion de Maven, importable desde cualquier IDE
-|-- src/          codigo fuente
-`-- README.md
+â”œâ”€â”€ pom.xml
+â”œâ”€â”€ README.md
+â”œâ”€â”€ LICENSE
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ AplMain.java              # Punto de entrada
+â”‚   â”œâ”€â”€ Controlador.java          # LÃ³gica de negocio
+â”‚   â”œâ”€â”€ SistemaLocal.java         # Modelo del sistema
+â”‚   â”œâ”€â”€ Moto.java, Venta.java     # Entidades de dominio
+â”‚   â”œâ”€â”€ DataMapper.java           # Mapeo objeto-relacional
+â”‚   â”œâ”€â”€ FileHandler.java          # Lectura/escritura de archivos
+â”‚   â”œâ”€â”€ IDAO.java, ...DAOImpl.java # Acceso a datos (patrÃ³n DAO)
+â”‚   â”œâ”€â”€ *.DTO.java                # Objetos de transferencia
+â”‚   â”œâ”€â”€ *.Exception.java          # Excepciones personalizadas
+â”‚   â”œâ”€â”€ VentanaPrincipal.java     # Ventana principal Swing
+â”‚   â””â”€â”€ *.java                    # Otras ventanas Swing
+â””â”€â”€ ventas.txt                    # Archivo de datos incluido
 ```
 
-## Como ejecutarlo
+## ðŸ‘¨â€ðŸ’» Autor
 
-### Con Maven
+Sergio Parra â€” Estudiante de ingenierÃ­a de sistemas
 
-```bash
-mvn clean compile
-mvn exec:java
-```
+---
 
-### Con javac directamente
-
-```bash
-# Linux / macOS
-javac -d bin $(find src -name "*.java")
-
-# Windows (PowerShell)
-javac -d bin (Get-ChildItem -Recurse -Filter *.java src).FullName
-```
-
-```bash
-java -cp bin co.edu.unbosque.controller.AplMain
-```
-
-### Desde un IDE
-
-Cualquier IDE con soporte de Java (Eclipse, IntelliJ IDEA, VS Code o NetBeans)
-puede importar el proyecto directamente como **proyecto Maven**. Basta con abrir
-o importar la carpeta: el IDE detecta el `pom.xml`, resuelve las dependencias y
-compila sin configuracion adicional.
-
-## Autor
-
-Desarrollado por [Sergio Parra](https://github.com/P2X4A) como parte de su
-formacion en Java.
-
-## Licencia
-
-Ver el archivo [LICENSE](LICENSE).
+*Proyecto desarrollado con fines acadÃ©micos y de portafolio.*
